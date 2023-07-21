@@ -26,7 +26,7 @@ import com.example.demo.service.ContaService;
 import com.example.demo.service.SaldoInsuficienteException;
 
 @RestController
-@RequestMapping("/contas")
+@RequestMapping("/contas/seu bosta")
 public class ContaController {
 
     private ContaService contaService;
