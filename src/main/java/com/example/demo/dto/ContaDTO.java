@@ -1,7 +1,6 @@
 package com.example.demo.dto;
 
 public class ContaDTO {
-    
     private Long id;
     private String nomeCorrentista;
     private String cpf;
