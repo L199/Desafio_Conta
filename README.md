@@ -1,70 +1,68 @@
 # Guia de Configuração do Ambiente
 
-Este documento fornece instruções detalhadas sobre como baixar e instalar Java 17, Jericho HTML Parser versão 2.3.0-beta, e StackSpot. Siga os passos abaixo para configurar seu ambiente de desenvolvimento.
+Este documento fornece instruções sobre como baixar e instalar Java 17, configurar Gradle, configurar certificados e configurar o IntelliJ IDEA. Siga os passos abaixo para configurar seu ambiente de desenvolvimento.
 
 ## 1. Instalar Java 17
 
 ### 1.1. Usar a Central de Software para Instalar o JDK 17
 
-1. **Entrar na central de software:**
-   Abra a Central de Software do seu sistema operacional.
-
-2. **Procurar por "jdk":**
+1. **Procurar por "jdk":**
    Na barra de busca da Central de Software, procure por "jdk".
 
-3. **Instalar a versão mais recente do JDK 17:**
+2. **Instalar a versão mais recente do JDK 17:**
    - Certifique-se de selecionar o JDK fornecido pela Eclipse Foundation, não o OpenJDK.
-   - Clique em "Instalar".
+   - Clique em "instalar".
 
-![Central de Software - Buscar JDK](images/central_software_jdk_search.png)
-
-4. **Verificar a instalação:**
+3. **Verificar a instalação:**
    Após a instalação, abra o terminal e execute o seguinte comando para verificar se o JDK 17 foi instalado corretamente:
-
    ```sh
    where java
+Confirmar o Sucesso da Instalação:
+Se a instalação foi bem-sucedida, você verá a localização do executável do Java 17.
+2. Configurar Gradle
+Para tornar o Gradle acessível via linha de comando, precisamos adicionar o caminho do binário ao PATH.
+No menu do Windows, pesquise por "Editar as variáveis de ambiente para a sua conta".
+Crie uma nova variável de usuário com o nome "GRADLE_HOME" e o valor do caminho: C:\Users\seuRacf\jericho\tools\gradle-win, e clique em "ok".
+Clique em "Path" e em "Editar", em seguida, clique em "Novo" e adicione C:\Users\LGFPSCD\jericho\tools\gradle-win\bin, depois clique em "ok".
+3. Configurar Certificados do Jericho 2.3.0-beta
+Para configurar os certificados do Jericho 2.3.0-beta, siga as etapas abaixo:
 
+Jericho 2.3.0-beta:
+Coloque os certificados em: C:\Users\LGEPSCD\jericho\tools\certificados.
 
-## 1.2. Confirmar o Sucesso da Instalação
+Instalar os certificados para todos:
+Certifique-se de ter acesso de administrador para executar os seguintes comandos:
 
-Se a instalação foi bem-sucedida, você deverá ver a localização do executável do Java.
+sh
+Copiar código
+keytool -importcert -alias des-sts-mbi-cloud-ihf -file "C:\Users\LGFPSCD\jericho\tools\certificados\des-sts-mbi-cloud-íhf.cert" -keystore "C:\Users\LGFPSCD\jericho\tools\jdk17-win\lib\security\cacerts" -storepass changeit
 
-## 2. Baixar Jericho HTML Parser 2.3.0-beta
+keytool -importcert -alias gitcorp-prod-aws-cloud-ihf -file "C:\Users\LGFPSCD\Jericho\tools\certificados\gitcorp-prod-aws-cloud-ihf.cer" -keystore "C:\Users\LGFPSCD\jericho\tools\jdk17-win\lib\security\cacerts" -storepass changeit
 
-### 2.1. Baixar do Link
+keytool -importcert -alias gatewayawsdev -file "C:\Users\LGFPScD\jericho\tools\certificados\gatewayawsdev.cer" -keystore "C:\Users\LGFPSCD\jericho\tools\jdk17-win\lib\security\cacerts" -storepass changeit
+Certifique-se de substituir os caminhos dos certificados e do keystore de acordo com sua configuração.
+Todos os certificados foram instalados com sucesso.
 
-Acesse o seguinte link para baixar o Jericho HTML Parser 2.3.0-beta:
-[Baixar Jericho HTML Parser 2.3.0-beta](https://vigilant-eureka-c9bfe2ad.pages.github.io/documentacao/instalacao/2-baixar)
+4. Configuração no IntelliJ IDEA
+Para configurar o IntelliJ IDEA, siga as etapas abaixo:
 
-## 3. Instalar e Configurar o StackSpot
+Abra o IntelliJ IDEA.
 
-### 3.1. Pedir Permissões no UIacessos
+Vá para Settings > Build, Execution, Deployment > Build Tools > Gradle.
 
-Solicite as seguintes permissões no UIacessos:
+Configurar o Gradle no IntelliJ IDEA:
 
-- G XS6_STACKSPOTAI_DEV
-- UP2-GITHUB_COPILOT
-- DE7-GITHUB_DEVELOPER
-- G LE9 VIEWER
-- DE7-GITHUB_DEVELOPER
-- ED7-GITHUB_DEVELOPER
+Gradle user home: C:/Users/seuRACF/Jericho/tools/gradle-win.
+Use Gradle from: gradle-wrapper.properties File.
+Gradle JVM: Ecplise Temurin version 17.
+Clique em "Apply".
+Configurações do Projeto:
 
-### 3.2. Baixar e Instalar o STK CLI
+SDK: Ecplise Temurin version 17.
+Language level: 17 - Sealed types, always-strict floating-point semantics.
+Clique em "Apply".
+Para executar o IntelliJ IDEA, rode o Gradle:
 
-- **Fazer o download do STK CLI:**
-  Acesse o link abaixo e baixe o instalador do STK CLI:
-  [Baixar STK CLI](https://www.stackspot.com/pt/)
-
-- **Instalar o STK CLI:**
-  Siga as instruções do instalador para completar a instalação.
-
-### 3.3. Configurar e Usar o STK CLI
-
-1. **Abrir o Git Bash:**
-   Abra o Git Bash no seu sistema.
-
-2. **Logar no STK:**
-   No Git Bash, execute o seguinte comando para fazer login no STK:
-
-   ```sh
-   stk login
+gradle --configuration-cache
+gradle --build-cache
+Clique em Run 'Application' para rodar o Gradle.
